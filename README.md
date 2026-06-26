@@ -1,47 +1,96 @@
-# FastAPI Tutorial Project
+# ShareKit: Full Stack Social Media App
 
-A practical FastAPI project demonstrating RESTful API development, data validation, dependency injection, and asynchronous request handling in Python.
+A full-stack, asynchronous social media application that allows users to securely register, log in, and share image or video posts with text overlays. 
 
-## Project Overview
+Built with an API-first approach, this project features a high-performance backend serving an interactive web application, demonstrating modern Python development practices, secure authentication, and seamless third-party media handling.
 
-This project is built with FastAPI and is designed to showcase modern backend development skills, including:
+[🎥 Watch the Demo](Demo.mp4)
 
-- Building API endpoints with FastAPI
-- Validating request and response models using Pydantic
-- Managing application dependencies and services
-- Supporting asynchronous operations for scalable performance
 
-## Technologies
+## 🚀 Key Features
 
-- Python
-- FastAPI
-- Pydantic
-- Uvicorn
+*   **Asynchronous REST API:** Built with FastAPI for high-performance, non-blocking request handling.
+*   **Secure Authentication:** JWT-based user registration and login managed via `fastapi-users`, utilizing Argon2/Bcrypt for password hashing.
+*   **Media Management:** Integration with ImageKit for efficient media uploading, storage, and on-the-fly transformations (like dynamic text overlay generation).
+*   **Interactive UI:** A lightweight, reactive frontend built entirely in Python using Streamlit.
+*   **Relational Database:** Asynchronous SQLite database management using SQLAlchemy and `aiosqlite`.
 
-## Key Features
+## 🛠️ Tech Stack
 
-- Clean API design with organized route structure
-- Typed request and response schemas
-- Error handling and validation
-- Ready for local development and deployment
+*   **Backend:** Python 3.14+, FastAPI, SQLAlchemy, aiosqlite, Pydantic.
+*   **Frontend:** Streamlit, Requests.
+*   **Services:** ImageKit API (Media Storage & CDN).
+*   **Dependency Management:** `uv` / `pyproject.toml`.
 
-## Setup
+## 📂 Project Structure
 
-1. Create and activate a virtual environment:
+```text
+├── app/
+│   ├── app.py          # FastAPI application factory and main routes
+│   ├── db.py           # SQLAlchemy async engine, session maker, and ORM models
+│   ├── images.py       # ImageKit configuration and initialization
+│   ├── schemas.py      # Pydantic models for validation
+│   └── users.py        # Authentication backend and user management
+├── frontend.py         # Streamlit user interface
+├── main.py             # Uvicorn entry point
+├── pyproject.toml      # Project metadata and dependencies
+└── .env                # Environment variables
+```
 
-   python -m venv venv
-   source venv/bin/activate
+## 🗺️ Roadmap & Future Scope
 
-2. Install dependencies:
+- Migration to PostgreSQL: Transition the database from SQLite to PostgreSQL for robust production-ready concurrency.
+- CI/CD Pipeline: Implement GitHub Actions to run automated testing and linting on every pull request.
+- Automated Testing: Increase test coverage using pytest and httpx for backend endpoint verification.
+- Social Features: Add the ability for users to "like" and comment on media posts.
 
-   pip install fastapi uvicorn
+## ⚙️ Local Setup & Installation
 
-3. Run the application:
+### 1. Prerequisites
 
-   uvicorn main:app --reload
+Before you begin, ensure you have the following installed:
 
-## Resume Summary
+- Python 3.14 or higher
+- `uv` (an extremely fast Python package and project manager)
+- An ImageKit.io account (to obtain your API keys for media storage)
 
-- Developed a FastAPI-based backend tutorial project
-- Implemented RESTful endpoints with validation and async support
-- Demonstrated strong Python backend development practices
+### 2. Clone the Repository
+
+```bash
+git clone <repository-url>
+cd <repository-name>
+```
+
+### 3. Configure Environment Variables
+
+Create a `.env` file in the project root and add your ImageKit credentials:
+
+```env
+IMAGEKIT_PRIVATE_KEY=your_private_key_here
+IMAGEKIT_PUBLIC_KEY=your_public_key_here
+IMAGEKIT_URL=your_imagekit_url_endpoint_here
+```
+
+### 4. Install Dependencies
+
+Install all project dependencies using:
+
+```bash
+uv sync
+```
+
+### 5. Run the Application
+
+ShareKit requires both the FastAPI backend and the Streamlit frontend to be running simultaneously. Open two separate terminal windows.
+
+**Terminal 1 – Start the FastAPI backend**
+
+```bash
+uv run ./main.py
+```
+
+**Terminal 2 – Start the Streamlit frontend**
+
+```bash
+python -m streamlit run frontend.py
+```
